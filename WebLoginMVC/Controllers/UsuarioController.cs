@@ -21,6 +21,17 @@ namespace WebLoginMVC.Controllers
 
         public IActionResult DashBoard()
         {
+            string nombre = HttpContext.Session.GetString("UsuarioNombre");
+            string email = HttpContext.Session.GetString("UsuarioEmail");
+
+            if (string.IsNullOrEmpty(nombre))
+            {
+                return RedirectToAction("Inicio");
+            }
+
+            ViewBag.Nombre = nombre;
+            ViewBag.Email = email;
+
             return View();
         }
 
@@ -34,6 +45,9 @@ namespace WebLoginMVC.Controllers
                 ViewBag.Error = "Email o contraseña incorrectos.";
                 return View("Inicio");
             }
+
+            HttpContext.Session.SetString("UsuarioNombre", usuario.nombre);
+            HttpContext.Session.SetString("UsuarioEmail", usuario.email);
 
             return RedirectToAction("DashBoard");
         }

@@ -1,4 +1,11 @@
-﻿<h1 class="display-1">Bienvenido al Sistema</h1>
+﻿@{
+    string nombre = ViewBag.Nombre;
+    string email = ViewBag.Email;
+}
+
+<h1>Bienvenido al Sistema @nombre</h1>
+
+<h2>Correo: @email</h2>
 
 <div class="d-grid gap-2 mt-4">
     <a href="@Url.Action("Inicio", "Usuario")" class="btn btn-primary btn-lg">Salir</a>
