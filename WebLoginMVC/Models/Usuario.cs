@@ -19,7 +19,5 @@
             this.email = email;
             this.contrasenia = contrasenia;
         }
-
-
     }
 }

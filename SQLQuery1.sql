@@ -82,3 +82,16 @@ BEGIN
     DELETE FROM Usuarios WHERE id = @id;
 END
 GO
+
+CREATE PROCEDURE sp_LoginUser
+    @email NVARCHAR(100),
+    @contrasenia NVARCHAR(255)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT id, nombre, apellido, dni, email, contrasenia
+    FROM Usuarios
+    WHERE email = @email AND contrasenia = @contrasenia;
+END
+GO
+    

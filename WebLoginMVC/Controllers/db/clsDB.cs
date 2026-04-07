@@ -12,7 +12,7 @@ namespace WebLoginMVC.Controllers.db
 
         public clsDB()
         {
-            CadenaConexion = "Data Source=localhost;Initial Catalog=ExLogin;Integrated Security=True";
+            CadenaConexion = "Data Source=.;Initial Catalog=ExLogin;Integrated Security=True;TrustServerCertificate=True";
             cn = new SqlConnection(CadenaConexion);
             cmd = new SqlCommand("", cn);
             da = new SqlDataAdapter(cmd);
@@ -26,8 +26,10 @@ namespace WebLoginMVC.Controllers.db
 
         public void Sentencia(string sql)
         {
+            if (cn.State != ConnectionState.Open) cn.Open();
             cmd.CommandText = sql;
-            cmd.Parameters.Clear();
+            cmd.ExecuteNonQuery();
+            cn.Close();
         }
 
         public string[] getRegistro()
